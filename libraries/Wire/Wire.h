@@ -38,16 +38,13 @@ class TwoWire : public Stream
     static uint8_t rxBufferIndex;
     static uint8_t rxBufferLength;
 
-    static uint8_t txAddress;
-    static uint8_t txBuffer[];
-    static uint8_t txBufferIndex;
-    static uint8_t txBufferLength;
 
     static uint8_t transmitting;
     static void (*user_onRequest)(void);
     static void (*user_onReceive)(int);
     static void onRequestService(void);
     static void onReceiveService(uint8_t*, int);
+
   public:
     TwoWire();
     void begin(int sda, int scl);
@@ -83,6 +80,11 @@ class TwoWire : public Stream
     inline size_t write(unsigned int n) { return write((uint8_t)n); }
     inline size_t write(int n) { return write((uint8_t)n); }
     using Print::write;
+    static uint8_t txAddress;
+    static uint8_t txBuffer[];
+    static uint8_t txBufferIndex;
+    static uint8_t txBufferLength;
+
 };
 
 #if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_TWOWIRE)
