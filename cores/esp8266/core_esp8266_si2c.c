@@ -203,7 +203,7 @@ uint8_t twi_status(){
     if (SCL_READ()==0)     return I2C_SCL_HELD_LOW;       		//SCL held low by another device, no procedure available to recover
     int clockCount = 20;                   
 
-    while (SDA_READ()==0 && clockCount>0){                      //if SDA low, read the bits slaves have to sent to a max
+    while (SDA_READ()==0 && clockCount-->0){                      //if SDA low, read the bits slaves have to sent to a max
         twi_read_bit();                    
         if (SCL_READ()==0) return I2C_SCL_HELD_LOW_AFTER_READ;  //I2C bus error. SCL held low beyond slave clock stretch time
     }
